@@ -16,11 +16,11 @@ $   cat main.tf
 module "aws_vpc_peering" {
   source                                  = "../aws-vpc-peering"
   requester_region                        = "us-east-1"
-  peer_accepter_region                    = "us-east-2"
+  peer_acceptor_region                    = "us-east-2"
   requester_vpc_cidr                      = "10.0.0.0/16"
-  accepter_vpc_cidr                       = "172.31.0.0/16"
+  acceptor_vpc_cidr                       = "172.31.0.0/16"
   vpc_peering_connection_requester_name   = "requester"
-  vpc_peering_connection_accepter_name    = "accepter"
+  vpc_peering_connection_acceptor_name    = "acceptor"
 }
 /*-------------------------------------------------------*/
 ```

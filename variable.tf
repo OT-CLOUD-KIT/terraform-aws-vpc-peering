@@ -3,8 +3,8 @@ variable "requester_region" {
   default = "us-east-1"
 }
 
-variable "peer_accepter_region" {
-  description = "The region of the accepter VPC."
+variable "peer_acceptor_region" {
+  description = "The region of the acceptor VPC."
   default = "us-east-2"
 }
 
@@ -13,8 +13,8 @@ variable "requester_vpc_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "accepter_vpc_cidr" {
-  description = "The CIDR of the accepter VPC."
+variable "acceptor_vpc_cidr" {
+  description = "The CIDR of the acceptor VPC."
   default = "172.31.0.0/16"
 }
 
@@ -23,7 +23,7 @@ variable "vpc_peering_connection_requester_name" {
   default = "requester"
 }
 
-variable "vpc_peering_connection_accepter_name" {
-  description = "The NAME of the accepter VPC peering connection"
-  default = "accepter"
+variable "vpc_peering_connection_acceptor_name" {
+  description = "The NAME of the acceptor VPC peering connection"
+  default = "acceptor"
 }
