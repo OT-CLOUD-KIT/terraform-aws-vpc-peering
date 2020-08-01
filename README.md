@@ -16,7 +16,7 @@ $   cat main.tf
 module "aws_vpc_peering" {
   source                                  = "../aws-vpc-peering"
   requester_region                        = "us-east-1"
-  peer_acceptor_region                    = "us-east-2"
+  acceptor_region                    = "us-east-1"
   requester_vpc_cidr                      = "10.0.0.0/16"
   acceptor_vpc_cidr                       = "172.31.0.0/16"
   vpc_peering_connection_requester_name   = "requester"
@@ -38,7 +38,7 @@ output "vpc_peering_id" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | requester_region | The region of the requester VPC. | `string` | `us-east-1` | yes |
-| peer_accepter_region | The region of the accepter VPC. | `string` | `us-east-2` | yes |
+| accepter_region | The region of the accepter VPC. | `string` | `us-east-2` | yes |
 | requester_vpc_cidr | The CIDR of the requester VPC. | `string` | `10.0.0.0/16` | yes |
 | accepter_vpc_cidr | The CIDR of the accepter VPC. | `string` | `172.31.0.0/16` | yes |
 | vpc_peering_connection_requester_name | The NAME of the requester VPC peering connection. | `string` | `requester` | yes |

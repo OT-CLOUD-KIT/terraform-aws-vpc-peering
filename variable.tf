@@ -3,9 +3,9 @@ variable "requester_region" {
   default = "us-east-1"
 }
 
-variable "peer_acceptor_region" {
+variable "acceptor_region" {
   description = "The region of the acceptor VPC."
-  default = "us-east-2"
+  default = "us-east-1"
 }
 
 variable "requester_vpc_cidr" {

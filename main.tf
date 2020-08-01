@@ -5,7 +5,7 @@ provider "aws" {
 
 provider "aws" {
   alias  = "peer_acceptor_provider"
-  region = var.peer_acceptor_region
+  region = var.acceptor_region
   # Acceptor's credentials.
 }
 
