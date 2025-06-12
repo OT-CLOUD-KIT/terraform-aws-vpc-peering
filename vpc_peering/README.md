@@ -2,8 +2,8 @@
 
 A Terraform module to create secure and configurable VPC peering connections across the same or different AWS accounts and regions, including automatic route table updates.
 ## Architecture
+![image](https://github.com/user-attachments/assets/b9693b60-b139-4292-88d3-496a7e3d9133)
 
-(![image](https://github.com/user-attachments/assets/f1e5ab28-8706-4a0f-84f9-328ed5cbc1ca)
 
 
 ## Providers
@@ -59,8 +59,17 @@ module "vpc_peering" {
 | <a name="data_aws_caller_identity_peer"></a> [aws_caller_identity.peer](#data_aws_caller_identity_peer)                                               | Data Source  |
 
 ---
+
 ## Inputs
 
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| requester_region | The region of the requester VPC. | `string` | `us-east-1` | yes |
+| accepter_region | The region of the accepter VPC. | `string` | `us-east-1` | yes |
+| requester_vpc_cidr | The CIDR of the requester VPC. | `string` | `10.0.0.0/16` | yes |
+| accepter_vpc_cidr | The CIDR of the accepter VPC. | `string` | `172.31.0.0/16` | yes |
+| vpc_peering_connection_requester_name | The NAME of the requester VPC peering connection. | `string` | `requester` | yes |
+| vpc_peering_connection_accepter_name | The NAME of the accepter VPC peering connection. | `string` | `accepter` | yes 
 
 ---
 
