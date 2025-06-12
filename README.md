@@ -7,10 +7,10 @@ A Terraform module to create secure and configurable VPC peering connections acr
 
 
 ## Providers
+| Name | Version |
+|------|---------|
+|Terraform |  >= 1.12.1|
 
-| Name                                              | Version  |
-|---------------------------------------------------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2   |
 
 ## Usage
 
