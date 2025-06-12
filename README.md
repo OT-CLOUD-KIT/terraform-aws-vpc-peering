@@ -1,38 +1,65 @@
-# aws-vpc-peering
+## Terraform AWS VPC Peering
 
-[![Opstree Solutions][opstree_avatar]][opstree_homepage]<br/>[Opstree Solutions][opstree_homepage] 
+A Terraform module to create secure and configurable VPC peering connections across the same or different AWS accounts and regions, including automatic route table updates.
+## Architecture
+![image](https://github.com/user-attachments/assets/b9693b60-b139-4292-88d3-496a7e3d9133)
 
-  [opstree_homepage]: https://opstree.github.io/
-  [opstree_avatar]: https://img.cloudposse.com/150x150/https://github.com/opstree.png
 
-- This repository consists of the Terraform module for AWS VPC Peering Service with in & cross region.
-- This project is a part of opstree's ot-aws initiative for terraform modules.
+
+## Providers
+
+| Name                                              | Version  |
+|---------------------------------------------------|----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2   |
 
 ## Usage
 
-```sh
-$   cat main.tf
-/*-------------------------------------------------------*/
-module "aws_vpc_peering" {
-  source                                  = "../aws-vpc-peering"
-  requester_region                        = "us-east-1"
-  acceptor_region                    = "us-east-1"
-  requester_vpc_cidr                      = "10.0.0.0/16"
-  acceptor_vpc_cidr                       = "172.31.0.0/16"
-  vpc_peering_connection_requester_name   = "requester"
-  vpc_peering_connection_acceptor_name    = "acceptor"
+```hcl
+provider "aws" {
+  region = var.region
 }
-/*-------------------------------------------------------*/
+
+provider "aws" {
+  alias  = "peer"
+  region = var.acceptor_region
+}
+
+module "vpc_peering" {
+  source = "./Module"
+
+  name                      = var.name
+  create_vpcs               = var.create_vpcs
+  requester_vpc_cidr        = var.requester_vpc_cidr
+  acceptor_vpc_cidr         = var.acceptor_vpc_cidr
+  requester_vpc_id          = var.requester_vpc_id
+  acceptor_vpc_id           = var.acceptor_vpc_id
+  requester_route_table_ids = var.requester_route_table_ids
+  acceptor_route_table_ids  = var.acceptor_route_table_ids
+  peer_owner_id             = var.peer_owner_id
+  acceptor_region           = var.acceptor_region
+  auto_accept               = var.auto_accept
+
+  providers = {
+    aws.requester = aws
+    aws.acceptor  = aws.peer
+  }
+}
+
 ```
 
-```sh
-$   cat output.tf
-/*-------------------------------------------------------*/
-output "vpc_peering_id" {
-  value = module.aws_vpc_peering.id
-}
-/*-------------------------------------------------------*/
-```
+## Resources
+
+| Name                                                                                                   | Type        |
+|--------------------------------------------------------------------------------------------------------|-------------|
+| <a name="resource_aws_vpc_peering_connection_peer"></a> [aws_vpc_peering_connection.peer](#resource_aws_vpc_peering_connection_peer)                   | Resource     |
+| <a name="resource_aws_vpc_peering_connection_accepter_peer"></a> [aws_vpc_peering_connection_accepter.peer](#resource_aws_vpc_peering_connection_accepter_peer) | Resource     |
+| <a name="resource_aws_route_requester_to_acceptor"></a> [aws_route.requester_to_acceptor](#resource_aws_route_requester_to_acceptor)                   | Resource     |
+| <a name="resource_aws_route_acceptor_to_requester"></a> [aws_route.acceptor_to_requester](#resource_aws_route_acceptor_to_requester)                   | Resource     |
+| <a name="data_aws_caller_identity_requester"></a> [aws_caller_identity.requester](#data_aws_caller_identity_requester)                                 | Data Source  |
+| <a name="data_aws_caller_identity_peer"></a> [aws_caller_identity.peer](#data_aws_caller_identity_peer)                                               | Data Source  |
+
+---
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -42,28 +69,17 @@ output "vpc_peering_id" {
 | requester_vpc_cidr | The CIDR of the requester VPC. | `string` | `10.0.0.0/16` | yes |
 | accepter_vpc_cidr | The CIDR of the accepter VPC. | `string` | `172.31.0.0/16` | yes |
 | vpc_peering_connection_requester_name | The NAME of the requester VPC peering connection. | `string` | `requester` | yes |
-| vpc_peering_connection_accepter_name | The NAME of the accepter VPC peering connection. | `string` | `accepter` | yes |
+| vpc_peering_connection_accepter_name | The NAME of the accepter VPC peering connection. | `string` | `accepter` | yes 
+
+---
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| id | The ID of the VPC Peering Connection |
+| Name                                                                                                                                       | Description                                                     |
+|--------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| <a name="output_vpc_peering_connection_id"></a> [vpc_peering_connection_id](#output_vpc_peering_connection_id)                             | The ID of the VPC peering connection                            |
+| <a name="output_requester_vpc_id"></a> [requester_vpc_id](#output_requester_vpc_id)                                                         | The VPC ID of the requester                                     |
+| <a name="output_acceptor_vpc_id"></a> [acceptor_vpc_id](#output_acceptor_vpc_id)                                                            | The VPC ID of the acceptor                                      |
 
-## Related Projects
 
-Check out these related projects.
-
-- [network_skeleton](https://gitlab.com/ot-aws/terrafrom_v0.12.21/network_skeleton) - Terraform module for providing a general purpose Networking solution
-- [security_group](https://gitlab.com/ot-aws/terrafrom_v0.12.21/security_group) - Terraform module for creating dynamic Security groups
-- [eks](https://gitlab.com/ot-aws/terrafrom_v0.12.21/eks) - Terraform module for creating elastic kubernetes cluster.
-- [HA_ec2_alb](https://gitlab.com/ot-aws/terrafrom_v0.12.21/ha_ec2_alb.git) - Terraform module for creating a Highly available setup of an EC2 instance with quick disater recovery.
-- [HA_ec2](https://gitlab.com/ot-aws/terrafrom_v0.12.21/ha_ec2.git) - Terraform module for creating a Highly available setup of an EC2 instance with quick disater recovery.
-- [rolling_deployment](https://gitlab.com/ot-aws/terrafrom_v0.12.21/rolling_deployment.git) - This terraform module will orchestrate rolling deployment.
-
-### Contributors
-
-[![Shweta Tyagi][shweta_avatar]][shweta_homepage]<br/>[Shweta Tyagi][shweta_homepage] 
-
-  [shweta_homepage]: https://github.com/shwetatyagi-ot
-  [shweta_avatar]: https://img.cloudposse.com/75x75/https://github.com/shwetatyagi-ot.png
+---

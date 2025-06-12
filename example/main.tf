@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 module "vpc_peering" {
-  source = "./Module"
+  source = "../"
 
   # input variables
   name                      = var.name
