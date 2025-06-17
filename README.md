@@ -5,6 +5,8 @@ A Terraform module to create secure and configurable VPC peering connections acr
 
 ![Untitled Diagram drawio](https://github.com/user-attachments/assets/413d185d-dd38-498b-98ab-5af18e97b327)
 
+> **Note:**  
+> The above infrastructure diagram illustrates a same-region VPC peering setup. However, this module supports creating VPC peering connections across multiple regions and even across different AWS accounts.
 
 ## Providers
 | Name | Version |
@@ -43,7 +45,11 @@ module "vpc_peering" {
   }
 }
 
+
 ```
+> **Note:**  
+> The above example demonstrates how to use the module. All variables, resources, and outputs used here are already defined within this module.
+
 ## Resources
 
 | Name                                                                                                   | Type        |
