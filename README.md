@@ -89,6 +89,6 @@ module "vpc_peering" {
 
 ## Contributor
 
-#### Piyush Upadhyay
-#### Nikita Joshi
+- Piyush Upadhyay
+- Nikita Joshi
 
