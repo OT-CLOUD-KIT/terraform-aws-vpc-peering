@@ -2,51 +2,48 @@
 
 A Terraform module to create secure and configurable VPC peering connections across the same or different AWS accounts and regions, including automatic route table updates.
 ## Architecture
-![image](https://github.com/user-attachments/assets/b9693b60-b139-4292-88d3-496a7e3d9133)
 
+![Untitled Diagram drawio](https://github.com/user-attachments/assets/413d185d-dd38-498b-98ab-5af18e97b327)
 
 
 ## Providers
 | Name | Version |
 |------|---------|
 |Terraform |  >= 1.12.1|
+|aws | 5.82.2 |
 
 
 ## Usage
 
 ```hcl
-provider "aws" {
-  region = var.region
-}
-
-provider "aws" {
-  alias  = "peer"
-  region = var.acceptor_region
-}
 
 module "vpc_peering" {
-  source = "./Module"
+  source = "../"
 
-  name                      = var.name
-  create_vpcs               = var.create_vpcs
-  requester_vpc_cidr        = var.requester_vpc_cidr
-  acceptor_vpc_cidr         = var.acceptor_vpc_cidr
-  requester_vpc_id          = var.requester_vpc_id
-  acceptor_vpc_id           = var.acceptor_vpc_id
-  requester_route_table_ids = var.requester_route_table_ids
-  acceptor_route_table_ids  = var.acceptor_route_table_ids
-  peer_owner_id             = var.peer_owner_id
-  acceptor_region           = var.acceptor_region
-  auto_accept               = var.auto_accept
+  requester_vpc_id             = var.requester_vpc_id
+  acceptor_vpc_id              = var.acceptor_vpc_id
+
+  requester_vpc_cidr           = var.requester_vpc_cidr
+  acceptor_vpc_cidr            = var.acceptor_vpc_cidr
+
+  requester_route_table_ids    = var.requester_route_table_ids
+  acceptor_route_table_ids     = var.acceptor_route_table_ids
+
+  requester_region             = var.requester_region
+  acceptor_region              = var.acceptor_region
+
+  peer_owner_id                = var.peer_owner_id
+
+  vpc_peering_connection_requester_name = var.vpc_peering_connection_requester_name
+  vpc_peering_connection_acceptor_name  = var.vpc_peering_connection_acceptor_name
 
   providers = {
-    aws.requester = aws
-    aws.acceptor  = aws.peer
+    aws.requester = aws.requester
+    aws.acceptor  = aws.acceptor
   }
 }
 
 ```
-
 ## Resources
 
 | Name                                                                                                   | Type        |
@@ -83,3 +80,9 @@ module "vpc_peering" {
 
 
 ---
+
+## Contributor
+
+#### Piyush Upadhyay
+#### Nikita Joshi
+
