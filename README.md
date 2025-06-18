@@ -96,8 +96,9 @@ module "vpc_peering" {
 | <a name="output_acceptor_routes"></a> [acceptor\_routes](#output\_acceptor\_routes) | Route IDs from acceptor to requester |
 
 
-## Contributor
+## Contributors
 
-- Piyush Upadhyay
-- Nikita Joshi
+- [Piyush Upadhyay](https://github.com/piiiyuushh)
+- [Nikita Joshi](https://github.com/jnikita19)
+
 
