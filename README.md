@@ -3,7 +3,8 @@
 A Terraform module to create secure and configurable VPC peering connections across the same or different AWS accounts and regions, including automatic route table updates.
 ## Architecture
 
-![Untitled Diagram drawio](https://github.com/user-attachments/assets/413d185d-dd38-498b-98ab-5af18e97b327)
+![new_peer drawio](https://github.com/user-attachments/assets/76431267-5fef-41a1-bbb5-69da06a1464d)
+
 
 > **Note:**  
 > The above infrastructure diagram illustrates a same-region VPC peering setup. However, this module supports creating VPC peering connections across multiple regions and even across different AWS accounts.
