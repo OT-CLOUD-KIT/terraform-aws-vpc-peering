@@ -21,32 +21,32 @@ A Terraform module to create secure and configurable VPC peering connections acr
 ## Usage
 
 ```hcl
-
 module "vpc_peering" {
   source = "../"
 
-  requester_vpc_id             = var.requester_vpc_id
-  acceptor_vpc_id              = var.acceptor_vpc_id
+  requester_vpc_id             = "vpc-0a1111111111abcd"
+  acceptor_vpc_id              = "vpc-0b2222222222abcd"
 
-  requester_vpc_cidr           = var.requester_vpc_cidr
-  acceptor_vpc_cidr            = var.acceptor_vpc_cidr
+  requester_vpc_cidr           = "10.0.0.0/16"
+  acceptor_vpc_cidr            = "10.1.0.0/16"
 
-  requester_route_table_ids    = var.requester_route_table_ids
-  acceptor_route_table_ids     = var.acceptor_route_table_ids
+  requester_route_table_ids    = ["rtb-01aaaaaaa1111abc", "rtb-01bbbbbbb2222abc"]
+  acceptor_route_table_ids     = ["rtb-02aaaaaaa1111abc", "rtb-02bbbbbbb2222abc"]
 
-  requester_region             = var.requester_region
-  acceptor_region              = var.acceptor_region
+  requester_region             = "us-east-1"
+  acceptor_region              = "us-east-1"
 
-  peer_owner_id                = var.peer_owner_id
+  peer_owner_id                = ""
 
-  vpc_peering_connection_requester_name = var.vpc_peering_connection_requester_name
-  vpc_peering_connection_acceptor_name  = var.vpc_peering_connection_acceptor_name
+  vpc_peering_connection_requester_name = "peer-to-vpc2"
+  vpc_peering_connection_acceptor_name  = "accept-from-vpc1"
 
   providers = {
     aws.requester = aws.requester
     aws.acceptor  = aws.acceptor
   }
 }
+
 
 
 ```
