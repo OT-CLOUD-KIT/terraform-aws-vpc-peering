@@ -15,11 +15,35 @@ module "vpc_peering" {
 
   peer_owner_id                = var.peer_owner_id
 
-  vpc_peering_connection_requester_name = var.vpc_peering_connection_requester_name
-  vpc_peering_connection_acceptor_name  = var.vpc_peering_connection_acceptor_name
-
+  bu                                   = var.bu
+  program                              = var.program
+  team                                 = var.team
+  app                                  = var.app
+  env                                  = var.env
   providers = {
     aws.requester = aws.requester
     aws.acceptor  = aws.acceptor
   }
 }
+
+
+module "naming" {
+  source   = "git@github.com:OT-CLOUD-KIT/terraform-aws-naming.git?ref=dev"
+  bu       = var.bu
+  env      = var.env
+  app      = var.app
+  tenant   = var.tenant
+  resource = var.resource
+}
+
+module "standard_tags" {
+  source = "git@github.com:OT-CLOUD-KIT/terraform-aws-standard-tagging.git?ref=dev"
+
+  bu      = var.bu
+  program = var.program
+  app     = var.app
+  team    = var.team
+  region = var.requester_region
+  env     = var.env
+}
+

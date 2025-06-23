@@ -1,3 +1,36 @@
+# --------------------------------------
+# Naming Convention Variables
+# --------------------------------------
+
+variable "bu" {
+  description = "Business Unit name (e.g., finance, marketing)"
+  type        = string
+}
+
+variable "program" {
+  description = "Program or department name"
+  type        = string
+}
+
+variable "app" {
+  description = "Application name"
+  type        = string
+}
+
+variable "env" {
+  description = "Deployment environment (e.g., dev, prod, staging)"
+  type        = string
+}
+
+variable "team" {
+  description = "Team responsible for the resources"
+  type        = string
+}
+
+# --------------------------------------
+# VPC Peering Core Variables
+# --------------------------------------
+
 variable "requester_vpc_id" {
   description = "VPC ID of the requester"
   type        = string
@@ -28,14 +61,18 @@ variable "acceptor_route_table_ids" {
   type        = list(string)
 }
 
+# --------------------------------------
+# Cross-Region / Cross-Account Configs
+# --------------------------------------
+
 variable "requester_region" {
-  description = "AWS region of the requester"
+  description = "AWS region of the requester VPC"
   type        = string
   default     = "us-east-1"
 }
 
 variable "acceptor_region" {
-  description = "AWS region of the acceptor"
+  description = "AWS region of the acceptor VPC"
   type        = string
   default     = "us-east-1"
 }
@@ -46,14 +83,3 @@ variable "peer_owner_id" {
   default     = ""
 }
 
-variable "vpc_peering_connection_requester_name" {
-  description = "Name for the VPC peering connection on the requester side"
-  type        = string
-  default     = "peering-requester"
-}
-
-variable "vpc_peering_connection_acceptor_name" {
-  description = "Name for the VPC peering connection on the acceptor side"
-  type        = string
-  default     = "peering-acceptor"
-}

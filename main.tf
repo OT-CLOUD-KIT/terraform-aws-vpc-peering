@@ -1,4 +1,3 @@
-
 terraform {
   required_providers {
     aws = {
@@ -7,12 +6,7 @@ terraform {
       configuration_aliases = [aws.requester, aws.acceptor]
     }
   }
-}  
-
-locals {
-  cross_account = var.peer_owner_id != null && var.peer_owner_id != ""
-  cross_region  = var.acceptor_region != var.requester_region
-}
+} 
 
 resource "aws_vpc_peering_connection" "this" {
   provider        = aws.requester
@@ -24,9 +18,12 @@ resource "aws_vpc_peering_connection" "this" {
 
   auto_accept     = false
 
-  tags = {
-    Name = var.vpc_peering_connection_requester_name
-  }
+  tags = merge(
+    {
+      Name = "${local.base_name}-peering-request"
+    },
+    local.common_tags
+  )
 }
 
 resource "aws_vpc_peering_connection_accepter" "this" {
@@ -34,9 +31,12 @@ resource "aws_vpc_peering_connection_accepter" "this" {
   vpc_peering_connection_id = aws_vpc_peering_connection.this.id
   auto_accept               = true
 
-  tags = {
-    Name = var.vpc_peering_connection_acceptor_name
-  }
+  tags = merge(
+    {
+      Name = "${local.base_name}-peering-accept"
+    },
+    local.common_tags
+  )
 }
 
 resource "aws_route" "requester_to_acceptor" {

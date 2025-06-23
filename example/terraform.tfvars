@@ -18,5 +18,21 @@ acceptor_region  = "us-east-1" # Change if cross-region
 
 peer_owner_id = "" ## For cross-account VPC peering, set the acceptor's AWS account ID
 
-vpc_peering_connection_requester_name = "peering-requester"
-vpc_peering_connection_acceptor_name  = "peering-acceptor"
+################# Naming Convension #####################
+
+random_alphanumeric_len = 4
+
+bu       = "peer"
+app      = "app"
+env      = "d"
+resource = "vpcPeering"
+tenant   = ""
+
+special = false
+upper   = false
+number  = true
+
+gen_no_of_names = 1
+
+team    = "team1"
+program = "ot-cloud-kit"
