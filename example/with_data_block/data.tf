@@ -7,10 +7,6 @@ data "terraform_remote_state" "requester_vpc" {
   }
 }
 
-
-
-
-
 # Acceptor VPC by tag
 data "aws_vpc" "acceptor" {
   count = var.acceptor_vpc_name != "" ? 1 : 0

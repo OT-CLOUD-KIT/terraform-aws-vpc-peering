@@ -71,7 +71,7 @@ variable "app" {
   description = "Application name (e.g., network, shared). Max 6 characters."
   type        = string
   validation {
-    condition     = length(var.app) <=15
+    condition     = length(var.app) <= 15
     error_message = "The app name must be less than or equal to 6 characters."
   }
 }

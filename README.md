@@ -22,7 +22,7 @@ A Terraform module to create secure and configurable VPC peering connections acr
 
 ```hcl
 module "vpc_peering" {
-  source = "../"
+  source = "OT-CLOUD-KIT/terraform-aws-vpc-peering"
 
   requester_vpc_id             = "vpc-0a1111111111abcd"
   acceptor_vpc_id              = "vpc-0b2222222222abcd"
@@ -37,9 +37,6 @@ module "vpc_peering" {
   acceptor_region              = "us-east-1"
 
   peer_owner_id                = ""
-
-  vpc_peering_connection_requester_name = "peer-to-vpc2"
-  vpc_peering_connection_acceptor_name  = "accept-from-vpc1"
 
   providers = {
     aws.requester = aws.requester
