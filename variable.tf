@@ -2,34 +2,23 @@
 # Naming Convention Variables
 # --------------------------------------
 
-variable "bu" {
-  description = "Business Unit name (e.g., finance, marketing)"
-  type        = string
-  default = "ot"
-}
 
-variable "program" {
-  description = "Program or department name"
-  type        = string
-  default = "ot-cloud-kit"
-}
 
 variable "app" {
   description = "Application name"
   type        = string
-  default = "bp"
+  default = "otcloud-kit"
 }
 
 variable "env" {
   description = "Deployment environment (e.g., dev, prod, staging)"
   type        = string
-  default = "d"
+  default = "dev"
 }
 
-variable "team" {
-  description = "Team responsible for the resources"
-  type        = string
-  default = "infra"
+variable "owner" {
+  type = string
+  default = "opstree"
 }
 
 # --------------------------------------

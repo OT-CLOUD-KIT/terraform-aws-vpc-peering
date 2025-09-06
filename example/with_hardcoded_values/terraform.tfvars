@@ -19,19 +19,6 @@ peer_owner_id = "" ## For cross-account VPC peering, set the acceptor's AWS acco
 
 ################# Naming Convension #####################
 
-random_alphanumeric_len = 4
-
-bu       = "ot"
-app      = "bp"
-env      = "d"
-resource = "vpc-peering"
-tenant   = ""
-
-special = false
-upper   = false
-number  = true
-
-gen_no_of_names = 1
-
-team    = "infra"
-program = "ot-cloud-kit"
+env = "dev"
+owner = "opstree"
+app = "otcloud-kit"

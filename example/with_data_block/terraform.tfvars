@@ -15,19 +15,6 @@ acceptor_region  = "us-east-1"
 
 ################## Naming Convension #####################
 
-random_alphanumeric_len = 4
-
-bu       = "ot"
-app      = "bp"
-env      = "d"
-resource = "vpcPeering"
-tenant   = ""
-
-special = false
-upper   = false
-number  = true
-
-gen_no_of_names = 1
-
-team    = "infra"
-program = "ot-cloud-kit"
+env = "dev"
+owner = "Opstree"
+app = "otcloud kit"

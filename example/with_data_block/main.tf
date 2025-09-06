@@ -1,23 +1,4 @@
 
-module "naming" {
-  source   = "git@github.com:OT-CLOUD-KIT/terraform-aws-naming.git?ref=dev"
-  bu       = var.bu
-  env      = var.env
-  app      = var.app
-  tenant   = var.tenant
-  resource = var.resource
-}
-
-module "standard_tags" {
-  source = "git@github.com:OT-CLOUD-KIT/terraform-aws-standard-tagging.git?ref=dev"
-
-  bu      = var.bu
-  program = var.program
-  app     = var.app
-  team    = var.team
-  region  = var.requester_region
-  env     = var.env
-}
 
 
 module "vpc_peering" {
@@ -44,9 +25,7 @@ module "vpc_peering" {
   ]))
 
 
-  bu               = var.bu
-  program          = var.program
-  team             = var.team
+  owner = var.owner
   app              = var.app
   env              = var.env
   peer_owner_id    = var.peer_owner_id

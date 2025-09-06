@@ -1,15 +1,11 @@
 locals {
   # Standard naming convention used across all resources
-  base_name = "${var.env}-${var.bu}-${var.app}"
+  base_name = "${var.env}-${var.app}"
 
   common_tags = {
-    "BusinessUnit" = var.bu
-    "Program"      = var.program
-    "Application"  = var.app
-    "Environment"  = var.env
-    "Team"         = var.team
-    "requester_region"    = var.requester_region
-    "ManagedBy"    = "Terraform"
+  env = var.env
+  owner =  var.owner
+  app = var.app 
   }
 
   cross_account = var.peer_owner_id != null && var.peer_owner_id != ""
